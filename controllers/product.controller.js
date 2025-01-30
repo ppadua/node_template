@@ -12,7 +12,7 @@ class ProductController {
             console.log(error);
         }
 
-        res.render("index", { user: req.session.user, products });
+        res.render("index", { products });
     }
     
     addProductToCart = async (req, res) => {
@@ -26,9 +26,8 @@ class ProductController {
                 const userCartProductModel = new UserCartProductModel();
                 /* Check if the product to be added is already in the cart. */
                 const [ cart_product ] = await userCartProductModel.fetchUserCartProductRecord(
-                    "*",
-                    "user_id = ? AND product_id = ?",
-                    [req.session.user.id, product_id]
+                    "*", "product_id = ?",
+                    [product_id]
                 );
 
                 /* If the product already exist on user's cart, increase the quantity. */
@@ -39,7 +38,7 @@ class ProductController {
                 }
                 /* If the product is not yet on the user's cart, create new cart product record. */
                 else{
-                    const { insertId } = await userCartProductModel.insertUserCartProductsData({ product_id, quantity, user_id: req.session.user.id });
+                    const { insertId } = await userCartProductModel.insertUserCartProductsData({ product_id, quantity });
 
                     response_data.status = !!insertId;
                 }

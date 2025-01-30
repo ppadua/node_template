@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import session from 'express-session';
 import routes from "./routes/index.js";
 import flash from "express-flash";
-import authenticationMiddleware from "./middlewares/authentication.middleware.js";
 
 dotenv.config();
 
@@ -21,7 +20,6 @@ app.use(session({
     })
 );
 app.use(flash());
-app.use(authenticationMiddleware);
 
 /* View Engine */
 app.set("view engine", "ejs");

@@ -2,11 +2,6 @@ import ProductModel from "../models/product.model.js";
 import CartProductModel from "../models/cart_product.model.js";
 import Ejs from "ejs";
 import Path from "path";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 class ProductController {
     index = async (req, res) => {
@@ -20,7 +15,6 @@ class ProductController {
         catch(error){
             console.log(error);
         }
-
     }
     
     addProductToCart = async (req, res) => {

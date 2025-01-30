@@ -8,10 +8,10 @@ class DatabaseModel{
             const { DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_PORT } = process.env;
 
             DatabaseModel.pool = mysql.createPool({
-                host: DATABASE_HOST,
-                user: DATABASE_USER,
-                password: DATABASE_PASSWORD,
-                database: DATABASE_NAME,
+                host: "localhost",
+                user: "root",
+                password: "root",
+                database: "tesda",
                 port: DATABASE_PORT,
             });
         }

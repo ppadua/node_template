@@ -12,12 +12,6 @@ const app = express();
 /* Middlewares */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve("public")));
-app.use(session({
-        secret: process.env.SESSION_SECRET,
-        saveUninitialized: true,  
-        resave: false,
-    })
-);
 
 /* View Engine */
 app.set("view engine", "ejs");

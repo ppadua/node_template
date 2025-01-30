@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("#products-container")
-        .on("click", ".decrease-qty-btn, .increase-qty-btn", handleChangeQuantity)
+        .on("click", ".decrease-qty-btn, .increase-qty-btn", handleChangeProductQuantity)
         .on("submit", ".add-to-cart-form", handleClickAddToCart)
 });
 
@@ -13,7 +13,7 @@ function handleClickAddToCart(){
     quantity_input_field.val((quantity > 0) ? quantity : 1);
 
     $.post(add_to_cart_form.attr("action"), add_to_cart_form.serialize(), (result) => {
-        alert(result.message);
+        $("#cart-container").html(result.result.render_product_on_cart);
         result.status && add_to_cart_form.find("input[name='quantity']").val(1);
     });
 
@@ -21,7 +21,7 @@ function handleClickAddToCart(){
 }
 
 /* Handles the click event on quantity change buttons. */
-function handleChangeQuantity(){
+function handleChangeProductQuantity(){
     const change_quantity_button = $(this);    
     const quantity_input = change_quantity_button.siblings("input[name='quantity']");
     const is_increase = change_quantity_button.hasClass("increase-qty-btn");

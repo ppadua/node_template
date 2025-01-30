@@ -7,7 +7,7 @@ FOLDER_PATH="../public/images"
 
 # MySQL table details
 TABLE_NAME="products"
-BULK_INSERT_QUERY="INSERT INTO $TABLE_NAME (name, image_path, description, price) VALUES"
+BULK_INSERT_QUERY="INSERT INTO $TABLE_NAME (name, image_path, price) VALUES"
 values_array=()
 
 # Remove the insert_queries.sql file if it exists
@@ -37,7 +37,7 @@ joined_values="${values_array[*]}"
 unset IFS
 
 # Output the MySQL insert queries to a file
-echo "INSERT INTO $TABLE_NAME (name, image_path, description, price) VALUES $joined_values" >> insert_queries.sql
+echo "INSERT INTO $TABLE_NAME (name, image_path, price) VALUES $joined_values" >> insert_queries.sql
 
 # NOTES: Run the following in the terminal
 # MAC:

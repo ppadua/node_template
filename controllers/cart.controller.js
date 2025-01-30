@@ -1,63 +1,23 @@
-import UserCartProductModel from "../models/user_cart_product.model.js";
+import CartProductModel from "../models/cart_product.model.js";
 
 class ProductController {
-    index = async (req, res) => {
-        let products_on_cart = [];
-
-        try{
-            products_on_cart = await new UserCartProductModel().fetchProductsOnCart();    
-        }
-        catch(error){
-            console.log(error);
-        }
-
-        res.render("cart", { products_on_cart });
-    }
-
     updateCartData = async (req, res) => {
         const response_data = { status: false, message: "" };
 
         try{
-            const { product_id, quantity = 1 } = req.body;
-            const userCartProductModel = new UserCartProductModel();
-    
-            const [ cart_product ] = await userCartProductModel.fetchUserCartProductRecord(
-                "id",
-                "user_id = ? AND product_id = ?",
-                [req.session.user.id, product_id]
-            );
+            const { product_id, quantity = 1, is_delete} = req.body;
+            const cartProductModel = new CartProductModel();
+            const [ cart_product ] = await cartProductModel.fetchCartProductRecord("id", "product_id = ?", [product_id] );
 
             if(cart_product?.id){
-                const { affectedRows } = await userCartProductModel.updateUserCartProductsData(cart_product.id, { quantity });
-                response_data.status = !!affectedRows;
-            }
-            else{
-                response_data.message = "Product not found in the cart.";
-            }
-        }
-        catch(error){
-            console.log(error);
-        }
-
-        res.json(response_data);
-    }
-
-    removeProductToCart = async (req, res) => {
-        const response_data = { status: false, message: "" };
-
-        try{
-            const { product_id } = req.body;
-            const userCartProductModel = new UserCartProductModel();
-
-            const [ cart_product ] = await userCartProductModel.fetchUserCartProductRecord(
-                "id",
-                "user_id = ? AND product_id = ?",
-                [req.session.user.id, product_id]
-            );
-
-            if(cart_product?.id){
-                const { affectedRows } = await userCartProductModel.deleteUserCartProductsData(cart_product.id);
-                response_data.status = !!affectedRows;
+                if(is_delete){
+                    const { affectedRows } = await cartProductModel.deleteCartProductsData(cart_product.id);
+                    response_data.status = !!affectedRows;
+                }
+                else{
+                    const { affectedRows } = await cartProductModel.updateCartProductsData(cart_product.id, { quantity });
+                    response_data.status = !!affectedRows;
+                }
             }
             else{
                 response_data.message = "Product not found in the cart.";
@@ -74,8 +34,8 @@ class ProductController {
         const response_data = { status: false, message: "" };
 
         try{
-            const userCartProductModel = new UserCartProductModel();
-            const { affectedRows } = await userCartProductModel.clearUserCartProducts();
+            const cartProductModel = new CartProductModel();
+            const { affectedRows } = await cartProductModel.checkoutCartProducts();
             
             if(affectedRows){
                 response_data.status = !!affectedRows;

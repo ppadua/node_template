@@ -1,0 +1,67 @@
+ 
+<h2 class="text-primary mb-4">My Cart</h2>
+<div class="table-responsive">
+    <table class="">
+        <thead class="">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="cart-container">
+<%                  
+            let total_price = 0;
+
+            if(products_on_cart.length){
+                products_on_cart.forEach(product => {
+                    const sub_total = product.price * product.quantity;
+                    total_price +=  sub_total;
+%>
+                    <tr class="cart-product">
+                        <td class="name"><%= product.name %></td>
+                        <td>₱<span class="price"><%= product.price %></span></td>
+                        <td>
+                            <form action="/carts/update" method="POST" class="update-cart-form d-inline">
+                                <input type="hidden" name="product_id" value="<%= product.id %>">
+                                <div class="quantity">
+                                    <button type="button" class="decrease-qty-btn">-</button>
+                                    <input type="number" name="quantity" value="<%= product.quantity %>" min="1" class="form-control text-center" readonly>
+                                    <button type="button" class="increase-qty-btn">+</button>
+                                </div>
+                            </form>
+                        </td>
+                        <td>₱<span class="subtotal"><%= sub_total %></span></td>
+                        <td>
+                            <form action="/carts/update" method="POST" class="remove-to-cart-form d-inline">
+                                <input type="hidden" name="is_delete" value="1">
+                                <input type="hidden" name="product_id" value="<%= product.id %>">
+                                <button type="submit" class="remove_product">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+<%                      });
+            }
+            else { %>
+                <tr>
+                    <td colspan="6" class="text-center">Your cart is empty.</td>
+                </tr>
+<%          } %>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="">Total:</td>
+                <td colspan="" class="">₱ <span id="overall-total"><%= total_price %></span></td>
+                <td colspan="" class="">
+                    <%          if(products_on_cart.length){ %>
+                        <form class="checkout-form" action="/carts/checkout" method="POST">
+                            <button type="submit" class="">Checkout</button>
+                        </form>
+                    <%          } %>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

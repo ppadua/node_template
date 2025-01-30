@@ -25,7 +25,6 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
   `price` decimal(8,2) NOT NULL,
   `image_path` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -35,15 +34,14 @@ CREATE TABLE `products` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user_cart_products`
+-- Table structure for table `cart_products`
 --
 
-DROP TABLE IF EXISTS `user_cart_products`;
+DROP TABLE IF EXISTS `cart_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_cart_products` (
+CREATE TABLE `cart_products` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` int DEFAULT '1',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -53,40 +51,14 @@ CREATE TABLE `user_cart_products` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_cart_products`
+-- Dumping data for table `cart_products`
 --
 
-LOCK TABLES `user_cart_products` WRITE;
-/*!40000 ALTER TABLE `user_cart_products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_cart_products` ENABLE KEYS */;
+LOCK TABLES `cart_products` WRITE;
+/*!40000 ALTER TABLE `cart_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cart_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'user','password','2025-01-17 10:41:19','2025-01-17 10:41:19');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

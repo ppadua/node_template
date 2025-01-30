@@ -1,14 +1,13 @@
 $(document).ready(function() {
     $("body")
-        .on("click", ".decrease-qty-btn, .increase-qty-btn", handleChangeQuantity)
+        .on("click", "#cart-container .decrease-qty-btn, #cart-container .increase-qty-btn", handleChangeQuantity)
         .on("submit", "form.update-cart-form", handleSubmitUpdateCart)
         .on("submit", "form.remove-to-cart-form", handleSubmitRemoveToCart)
         .on("submit", "form.checkout-form", handleSubmitCheckOut)
 });
 
-/* Handles the quantity change event for increase and decrease buttons. */
 function handleChangeQuantity(){
-    $(".decrease-qty-btn,.increase-qty-btn").addClass("disabled");
+    $("#cart-container .decrease-qty-btn, #cart-container .increase-qty-btn").addClass("disabled");
 
     const change_quantity_button = $(this);    
     const quantity_input = change_quantity_button.siblings("input[name='quantity']");
@@ -38,7 +37,7 @@ function handleSubmitUpdateCart(){
             alert(result.message);
         }
 
-        $(".decrease-qty-btn,.increase-qty-btn").removeClass("disabled");
+        $("#cart-container .decrease-qty-btn, #cart-container .increase-qty-btn").removeClass("disabled");
     });
 
     return false;
@@ -77,7 +76,7 @@ function handleSubmitCheckOut(){
         order_details += `${quantity} ${name.trim()} = ${subtotal}\n`;
     });
     
-    order_details += `Overall Total: ${$("#overall-total").text()}`;
+    order_details += `Overall Total: ${$("#cart-container #overall-total").text()}`;
 
     $.post(checkout_form.attr("action"), checkout_form.serialize(), (result) => {
         if(result.status){
@@ -97,9 +96,7 @@ function updateSubtotalTexts(row_field, is_increment){
     const product_price = parseInt(row_field.find("span.price").text());
     const subtotal_field = row_field.find("span.subtotal")
     const current_subtotal = parseInt(subtotal_field.text());
-    const new_subtotal = (is_increment)
-        ? current_subtotal + product_price 
-        : current_subtotal - product_price;
+    const new_subtotal = (is_increment) ? current_subtotal + product_price  : current_subtotal - product_price;
     
     subtotal_field.text(new_subtotal);
 
@@ -108,11 +105,9 @@ function updateSubtotalTexts(row_field, is_increment){
 
 /* Handles the updating of the overall total text. */
 function updateOverallTotalText(amount, is_increment){
-    const overall_total_field = $("#overall-total");
+    const overall_total_field = $("#cart-container #overall-total");
     const current_overall_total = parseInt(overall_total_field.text());
-    const new_overall_total = (is_increment) 
-        ? current_overall_total + amount 
-        : current_overall_total - amount;
+    const new_overall_total = (is_increment) ? current_overall_total + amount  : current_overall_total - amount;
     
     overall_total_field.text(new_overall_total || 0);
 }

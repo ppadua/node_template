@@ -1,4 +1,123 @@
+
+
+body{
+    padding-top: 50px;
+}
+
+#products-container{
+    max-width: 70%;
+}
+
+#cart-container{
+    max-width: 29%;
+}
+
+.container {
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#cart-container > tr:nth-child(1) > td:nth-child(3) {
+    width: 120px;
+}
+
+#cart-container tfoot > tr:nth-child(1) > td:nth-child(3),
+#cart-container tbody  > tr > td:nth-child(5) {
+    /* width: 120px; */
+    text-align: center !important;
+}
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    text-align: center;
+}
+
+p{
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+}
+p.text-primary{
+    text-align: right;
+}
+
+.actions, .quantity{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 div.card img{
     height: 200px;
     object-fit: cover;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+button[type="submit"].remove_product {
+    background-color: #e35239;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"].remove_product:hover {
+    background-color: #f66d4b;
+}
+
+.increase-qty-btn, .decrease-qty-btn {
+    background-color: #d2d2d2;
+    color: white;
+    padding: 10 px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.quantity input {
+    width: 50px;
+    text-align: center;
+    border: 0px;
+}
+
+@media screen and (max-width: 1500px) {
+    .container {
+        display: block;
+        max-width: 100% !important; 
+    }
+}
+
+table{
+    border: 1px solid  #d2d2d2;
+}
+table th, table td{
+    border: 1px solid  #d2d2d2;
+    padding: 10px;
+}
+
+table th {
+    width: 100%;       
 }

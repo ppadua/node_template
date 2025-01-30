@@ -1,5 +1,5 @@
  
-<h2 class="text-primary mb-4">My Cart</h2>
+<h2 class="">My Cart</h2>
 <div class="table-responsive">
     <table class="">
         <thead class="">
@@ -21,7 +21,10 @@
                     total_price +=  sub_total;
 %>
                     <tr class="cart-product">
-                        <td class="name"><%= product.name %></td>
+                        <td class="name">
+                            <img src="/images/<%= product.image_path %>" alt="" style="height: 50px; width: 100px; object-fit: cover;" class="image_card">
+                            <%= product.name.replace("-", " ") %>
+                        </td>
                         <td>₱<span class="price"><%= product.price %></span></td>
                         <td>
                             <form action="/carts/update" method="POST" class="update-cart-form d-inline">

@@ -16,23 +16,21 @@
     <link rel="stylesheet" href="/customs/css/night-mode.css">
 </head>
 <body>
-    <div>
+    <div class="header">
         <label class="switch">
             <input type="checkbox">
             <span class="slider round"></span>
         </label>
-        <span>Night Mode</span>
     </div>
     <div id="products-container" class="container">
-        <h2 class="text-primary mb-4">Products</h2>
-
+        <h2 class="">Products</h2>
         <div class="row g-4">
             <% products.forEach(product => { %>
                 <form action="/products/add-to-cart" method="POST" class="add-to-cart-form col">
                     <div class="card h-100">
                         <img src="/images/<%= product.image_path %>" class="card-img-top img-fluid image_card" alt="<%= product.name %>" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
-                            <p class="card-title text-truncate product_name" style="font-size: 0.85rem;"><%= product.name %></h6>
+                            <p class="card-title text-truncate product_name" style="font-size: 0.85rem;"><%= product.name.replace("-", " ") %></h6>
                             <p class="card-text text-primary fw-bold mb-2" style="font-size: 0.9rem;">₱ <%= product.price %></p>
 
                             <div class="actions">

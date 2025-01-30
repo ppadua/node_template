@@ -16,7 +16,7 @@ class CartProductModel extends DatabaseModel{
 
     fetchProductsOnCart = async () => {
         return await this.executeQuery(format(`
-            SELECT cart_products.quantity, products.id, products.name, products.description, products.price
+            SELECT cart_products.quantity, products.id, products.name, products.description, products.price, products.image_path
             FROM cart_products
             INNER JOIN products ON products.id = cart_products.product_id`
         ));
